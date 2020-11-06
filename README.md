@@ -6,8 +6,8 @@
 
 > only if you are using Linux Based devices .
 ```console
-sudo apt install python3-tk #for Debian
-sudo pacman -S python3-tk
+sudo apt install python3-tk # For Debian Based
+sudo pacman -S python3-tk   # For Arch Based
 ```
 
 
