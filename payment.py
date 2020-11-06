@@ -40,8 +40,8 @@ def finalpay():
         server = smtplib.SMTP('smtp.gmail.com', 587)
         
         server.starttls()
-        server.login('khaopiyorestaurant12@gmail.com','Shazx06@')
-        server.sendmail('khaopiyorestaurant12@gmail.com',a[0], msg)
+        server.login(gmail_id, pasword)
+        server.sendmail('gmail',a[0], msg)
         server.close()
 
         b=True 
