@@ -233,12 +233,13 @@ def bill():
     treeview.heading("two",text='Item count')
    
     for i , j in [(dosapopvar,dosa), (idlipopvar,idli), (frenchpopvar,french) , (friedpopvar,fried),(biryanipopvar,biryani), (drinkpopvar,drinkvar),(noodlespopvar, noodles)]:
-        if i.get() !='Null':
-            flag=1
-            if i is not drinkpopvar:
+        if i is not drinkpopvar and i.get()!="Null" and j.get()!='0':
+                flag=1
                 treeview.insert("","end",values=[i.get(),f'{j.get():>6}'])
-            else:
+        elif i is drinkpopvar and  i.get()!='Null' and j.get()!="Null":
+                flag=1
                 treeview.insert("","end",values=[j.get()+" "+i.get(),f'{" "*10}{"1"}'])
+        
                 
      
     if flag==0:
