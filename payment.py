@@ -7,18 +7,20 @@ import smtplib
 import sqlite3 
 from platform import system
 from tkcalendar import DateEntry
+import os
 if system()=='Linux':
     theme='scidgreen'
 else:
     theme='radiance'
 
 #from login import w
-
+gmail_id=os.environ.get('mail')
+password=os.environ.get('password')
 mydb1=sqlite3.connect('login_db.db')
 cursor=mydb1.cursor()
 def finalpay():
      '''this mailing  funtions is done by shazib rahman using smtplib package
-     this funcitons mail the user about what they ordered and the sum total including taxes
+     this funcitons mail the user about what they ordered and the sum total including taxes (GST)
      '''
 
      file1=open('img//username')
@@ -40,13 +42,13 @@ def finalpay():
         server = smtplib.SMTP('smtp.gmail.com', 587)
         
         server.starttls()
-        server.login(gmail_id, pasword)
+        server.login(gmail_id, password)
         server.sendmail('gmail',a[0], msg)
         server.close()
 
         b=True 
-     except:
-        messagebox.showinfo('INTERNET ISSUE',f'{msg}')
+     except Exception as e:
+        messagebox.showinfo('INTERNET ISSUE',f'{msg}\n {e}')
     
 
      global onlinepay , debt , payroot
