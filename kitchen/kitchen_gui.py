@@ -1,7 +1,8 @@
-from tkinter import ttk, BooleanVar
-from ttkthemes import ThemedTk, ThemedStyle
-from functools import partial
 import sqlite3
+from tkinter import BooleanVar, ttk
+
+from ttkthemes import ThemedTk
+
 try:
     import kitchen.kitchen_main as km
 except:
@@ -125,30 +126,30 @@ class MainGUI:
 
     def selectItem(self, a):
         curItem = self.listbox.focus()
-        id = self.listbox.item(curItem).get("text")
-        if id == "--":
-            pass
+        _id = self.listbox.item(curItem).get("text")
+        if _id == "--":
+            ...
         else:
-            self.gui_details(id)
-            self.refresh(self.detail, None, id)
+            self.gui_details(_id)
+            self.refresh(self.detail, None, _id)
 
-    def refresh(self, detail, fun, id):
+    def refresh(self, detail, fun, _id):
         # Determine Function of Refresh else do nothing
         orders = self.order_ids
         if fun == "next":
             # When at end, loop back to start
-            if orders.index(id)+1 == len(orders):
-                id = orders[0]
+            if orders.index(_id)+1 == len(orders):
+                _id = orders[0]
             else:
-                id = orders[orders.index(id)+1]
+                _id = orders[orders.index(_id)+1]
 
         elif fun == "prev":
-            id = orders[orders.index(id)-1]
-        self.id = id
+            _id = orders[orders.index(_id)-1]
+        self.id = _id
 
         # Create Changing Value Lables
         conn = sqlite3.connect("login_db.db")
-        query = f"SELECT * FROM orders WHERE order_no={id}"
+        query = f"SELECT * FROM orders WHERE order_no={_id}"
         items = conn.execute(query)
         converted_item = tuple(items)[0]
         ttk.Label(self.detail, anchor="w", width=18,
@@ -157,10 +158,10 @@ class MainGUI:
                   text=f"{converted_item[1]}").grid(row=3, column=1, padx=3)
 
         self.tree.delete(*self.tree.get_children())
-        for item in self.order_details.get(id):
+        for item in self.order_details.get(_id):
             self.tree.insert("", "end", text=item[0], values=(item[1], ))
 
-        for i in range(10):
+        for _ in range(10):
             self.tree.insert("", "end", text="", values=("", ))
 
         self.tree.grid(row=4, column=0, columnspan=2, padx=15, pady=10)

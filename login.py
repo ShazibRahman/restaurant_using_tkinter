@@ -1,11 +1,14 @@
-from tkinter import *
-import tkinter as tk
-from restaurant import main
-from tkinter import messagebox
 import sqlite3
-from ttkthemes import ThemedStyle
-from tkinter.ttk import *
+import tkinter as tk
 from platform import system
+from tkinter import *
+from tkinter import messagebox
+from tkinter.ttk import *
+
+from ttkthemes import ThemedStyle
+
+from restaurant import main
+
 if system() == 'Linux':
     theme = 'scidgreen'
 else:
